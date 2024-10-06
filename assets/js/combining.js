@@ -18050,9 +18050,9 @@ v1.0.1*/
           this.s.download &&
             this.$outer
               .find(".lg-toolbar")
-              .append(
-                '<a id="lg-download" target="_blank" download class="lg-download lg-icon"></a>'
-              ),
+              .append
+              // '<a id="lg-download" target="_blank" download class="lg-download lg-icon"></a>'
+              (),
           (this.prevScrollTop = a(window).scrollTop());
       }),
       (b.prototype.setTop = function () {
@@ -20062,27 +20062,8 @@ v1.0.1*/
         var b = this,
           c =
             '<span id="lg-share" class="lg-icon"><ul class="lg-dropdown" style="position: absolute;">';
-        (c += b.core.s.facebook
-          ? '<li><a id="lg-share-facebook" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' +
-            this.core.s.facebookDropdownText +
-            "</span></a></li>"
-          : ""),
-          (c += b.core.s.twitter
-            ? '<li><a id="lg-share-twitter" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' +
-              this.core.s.twitterDropdownText +
-              "</span></a></li>"
-            : ""),
-          (c += b.core.s.googlePlus
-            ? '<li><a id="lg-share-googleplus" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' +
-              this.core.s.googlePlusDropdownText +
-              "</span></a></li>"
-            : ""),
-          (c += b.core.s.pinterest
-            ? '<li><a id="lg-share-pinterest" target="_blank"><span class="lg-icon"></span><span class="lg-dropdown-text">' +
-              this.core.s.pinterestDropdownText +
-              "</span></a></li>"
-            : ""),
-          (c += "</ul></span>"),
+
+        (c += "</ul></span>"),
           this.core.$outer.find(".lg-toolbar").append(c),
           this.core.$outer
             .find(".lg")

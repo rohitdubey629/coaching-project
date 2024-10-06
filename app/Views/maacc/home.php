@@ -1,9 +1,46 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    
+    <style>
+        #slider_heading {
+            color: #fff;
+            font-size: 20px;
+            font-weight: 400;
+            font-family: "Inter", sans-serif;
+            width: fit-content;
+            display: inline-block;
+            background-color: #198754;
+            padding: 6px;
+            border-radius: 20px 20px 0px 0px;
+            line-height: 25px;
+            text-align: center;
+        }
+
+        #slider_content {
+            color: #fff;
+            font-size: 15px;
+            font-weight: 400;
+            line-height: 30px;
+            background: #0000006e;
+            width: fit-content;
+            border-radius: 25px;
+            padding: 5px;
+        }
+
+        .home_event {
+
+            overflow-y: scroll;
+            scrollbar-width: thin;
+            scrollbar-color: #007 #fea116;
+            height: 420px;
+            overflow: auto;
+        }
+
+        .action-box {
+            height: auto !important;
+        }
+    </style>
 
 </head>
 
@@ -19,200 +56,134 @@
         <!-- header -->
 
 
-        <?php echo view('maacc/layout/header.php');?>
+        <?php echo view('maacc/layout/header.php'); ?>
 
         <!-- header END -->
         <div class="action-area marquee-head marquee">
             <ul>
-                <li><a href="courses-details.html">RESULT OF SSC CGL 2020 (TIER-3)</a></li>
-                <li><a href="courses-details.html">SSC CGL 2020 PRE Application Status</a></li>
-                <li><a href="courses-details.html">SSC CHSL 2020 Result Declared</a></li>
-                <li><a href="courses-details.html">RESULT OF SSC CGL 2020 (TIER-3)</a></li>
-                <li><a href="courses-details.html">SSC CGL 2020 PRE Application Status</a></li>
-                <li><a href="courses-details.html">SSC CHSL 2020 Result Declared</a></li>
-                <li><a href="courses-details.html">RESULT OF SSC CGL 2020 (TIER-3)</a></li>
-                <li><a href="courses-details.html">SSC CGL 2020 PRE Application Status</a></li>
-                <li><a href="courses-details.html">SSC CHSL 2020 Result Declared</a></li>
+                <?php
+                if (!empty($event)) {
+                    foreach ($event as $key => $value) {
+                ?>
+                        <li><a href="<?php echo base_url('event') ?>"><?php echo $value['heading'] . " " . $value['event_date'] . " " . $value['month'] ?></a></li>
+                <?php
+                    }
+                }
+                ?>
             </ul>
         </div>
         <!-- Content -->
         <div class="page-content bg-white">
             <!-- Slider Banner -->
             <!-- Main Slider -->
-            <div class="owl-slider owl-carousel owl-theme owl-btn-center-lr dots-none">
-                <div class="item slide-item">
-                    <div class="slide-item-img"><img src="<?php echo base_url('assets/')?>images/main-slider/slide1.jpg" class="" alt="" /></div>
-                    <div class="slide-content">
-                        <div class="slide-content-box container">
-                            <div class="slide-content-area">
-                                <h2 class="slider-title">Start Investing in You</h2>
-                                <p>With over 1200 courses in 18 subjects, you're guaranteed to find something that's right for you.</p>
+            <div class="owl-slider owl-carousel owl-theme owl-btn-center-lr dots-none ">
+                <?php
+                if (!empty($home_scrollbar)) {
+                    foreach ($home_scrollbar as $key => $value) { ?>
+                        <div class="item slide-item">
+                            <div class="slide-item-img"><img src="<?php echo base_url() ?>uploads/home_slider/<?php echo $value['img1'] ?>" class="" alt="" /></div>
+                            <div class="slide-content">
+                                <div class="slide-content-box container">
+                                    <div class="slide-content-area">
+                                        <h2 class="slider-title" id="slider_heading"><?php echo $value['heading'] ?></h2>
+                                        <p id="slider_content"><?php echo $value['content'] ?></p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="item slide-item">
-                    <div class="slide-item-img"><img src="<?php echo base_url('assets/')?>images/main-slider/slide1.jpg" class="" alt="" /></div>
-                    <div class="slide-content">
-                        <div class="slide-content-box container">
-                            <div class="slide-content-area">
-                                <h2 class="slider-title">Ask, Learn & Lead It</h2>
-                                <p>With Better Score, Better Career & Ultimately by Building Better India with the Power of Knowledge</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
+                <?php
+                    }
+                }
+                ?>
+
             </div>
+
             <!-- Slider Banner -->
             <div class="content-block">
-                <div class="section-full bg-gray content-inner-2">
-                    <div class="container">
-                        <div class="row">
-                            <div class="courses-carousel owl-carousel owl-btn-center-lr owl-btn-3 col-md-12 p-lr0">
-                                <div class="item">
-                                    <div class="courses-bx">
-                                        <img src="<?php echo base_url('assets/')?>images/courses/railway.png" alt="" />
-                                        <h2 class="title">Railway</h2>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="courses-bx">
-                                        <img src="<?php echo base_url('assets/')?>images/courses/banking.png" alt="" />
-                                        <h2 class="title">Banking</h2>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="courses-bx">
-                                        <img src="<?php echo base_url('assets/')?>images/courses/bba.png" alt="" />
-                                        <h2 class="title">BBA</h2>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="courses-bx">
-                                        <img src="<?php echo base_url('assets/')?>images/courses/law.png" alt="" />
-                                        <h2 class="title">LAW</h2>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="courses-bx">
-                                        <img src="<?php echo base_url('assets/')?>images/courses/mba.png" alt="" />
-                                        <h2 class="title">MBA</h2>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <!-- About Us -->
-                <div class="section-full bg-white content-inner-2" style="background-image:url(images/pattern/pt1.png);">
-                    <div class="container">
-                        <div class="section-head text-center">
-                            <h2 class="title">World Class Facilities</h2>
-                            <p class="ext">Ask The Question, Learn With Perfection, Lead With Conviction</p>
-                        </div>
-                        <div class="row align-items-center about-bx2">
-                            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                                <img src="<?php echo base_url('assets/')?>images/about/about-1.png" class="img" alt="" />
-                            </div>
-                            <div class="col-lg-6 col-md-12 col-sm-12 col-12">
-                                <div class="about-box">
-                                    <h3 class="title"> Ask whatever you want </h3>
-                                    <p class="ext">Get your exam related doubts and questions answered by experienced and qualified faculty </p>
-                                    <ul class="list-check">
-                                        <li>Stuck with subject related queries?</li>
-                                        <li>Confused among lots of career choices?</li>
-                                        <li>Looking for expert guidance in studies?</li>
-                                        <li>Want latest notification about exams?</li>
-                                    </ul>
-                                    <div class="about-mamber">
-                                        <img src="<?php echo base_url('assets/')?>images/testimonials/pic2.jpg" class="user" alt="" />
-                                        <img src="<?php echo base_url('assets/')?>images/sign.png" class="sign" alt="" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+
                 <div class="section-full content-inner-2 bg-gray">
                     <div class="container">
                         <div class="row">
-                            <div class="col-lg-4 col-md-12 col-sm-12 col-12">
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-12 home_event">
                                 <div class="action-box">
                                     <div class="head">
                                         <h4 class="title">Notification</h4>
                                     </div>
                                     <div class="action-area marquee1">
                                         <ul>
-                                            <li><a href="courses-details.html">RESULT OF SSC CGL 2020 (TIER-3)</a></li>
-                                            <li><a href="courses-details.html">SSC CGL 2020 PRE Application Status</a></li>
-                                            <li><a href="courses-details.html">SSC CHSL 2020 Result Declared</a></li>
-                                            <li><a href="courses-details.html">RESULT OF SSC CGL 2020 (TIER-3)</a></li>
-                                            <li><a href="courses-details.html">SSC CGL 2020 PRE Application Status</a></li>
-                                            <li><a href="courses-details.html">SSC CHSL 2020 Result Declared</a></li>
-                                            <li><a href="courses-details.html">RESULT OF SSC CGL 2020 (TIER-3)</a></li>
-                                            <li><a href="courses-details.html">SSC CGL 2020 PRE Application Status</a></li>
-                                            <li><a href="courses-details.html">SSC CHSL 2020 Result Declared</a></li>
+                                            <?php
+                                            if (!empty($event)) {
+                                                foreach ($event as $key => $value) {
+                                            ?>
+                                                    <li><a href="<?php echo base_url('event') ?>"><?php echo $value['heading'] . " " . $value['event_date'] ?></a></li>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-12 col-sm-12 col-12">
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-12 home_event">
                                 <div class="action-box">
                                     <div class="head">
                                         <h4 class="title">Events</h4>
                                     </div>
                                     <div class="action-area">
                                         <ul class="event-bx">
-                                            <li><a href="event-details.html">New SSC-CGL/10+2 batch starts from "24th of June at 7:00 AM" at Tonk Road branch,Jaipur.</a></li>
-                                            <li><a href="event-details.html">New SSC-CGL MAINS batch starts from "26th of June at 10:00 AM" at Gurjar ki thadi branch,Jaipur.</a></li>
-                                            <li><a href="event-details.html">New SSC-CGL/10+2 and Bank-PO/Clerk batch starts from "3rd of July at 7:00 AM" at Tonk Road Branch,Jaipur.</a></li>
+
+                                            <?php
+                                            if (!empty($event)) {
+                                                foreach ($event as $key => $value) {
+                                            ?>
+                                                    <li><a href="<?php echo base_url('event') ?>"><?php echo $value['content'] ?></a></li>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-12 col-sm-12 col-12">
+                            <div class="col-lg-4 col-md-12 col-sm-12 col-12 home_event">
                                 <div class="action-box">
                                     <div class="head">
                                         <h4 class="title">Blog / Artical</h4>
                                     </div>
                                     <div class="action-area">
                                         <ul class="blog-artical">
-                                            <li>
-                                                <a href="blog-details.html">
-                                                    <div class="date">
-                                                        <span>10</span>
-                                                        <strong>Jan</strong>
-                                                    </div>
-                                                    <h5 class="title">Preparation Strategy for SSC-CGL</h5>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-details.html">
-                                                    <div class="date">
-                                                        <span>21</span>
-                                                        <strong>AUG</strong>
-                                                    </div>
-                                                    <h5 class="title">New Pattern of SSC-CGL brings more transparency.</h5>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="blog-details.html">
-                                                    <div class="date">
-                                                        <span>06</span>
-                                                        <strong>Mar</strong>
-                                                    </div>
-                                                    <h5 class="title">How to manage time for SSC examination</h5>
-                                                </a>
-                                            </li>
+                                            <?php
+                                            if (!empty($event)) {
+                                                foreach ($event as $key => $value) {
+                                            ?>
+                                                    <li>
+                                                        <a href="<?php echo base_url('event') ?>">
+                                                            <div class="date">
+                                                                <span><?php echo $value['event_date'] ?></span>
+                                                                <strong><?php echo $value['month'] ?></strong>
+                                                            </div>
+                                                            <h5 class="title"><?php echo $value['heading'] ?></h5>
+                                                        </a>
+                                                    </li>
+                                            <?php
+                                                }
+                                            }
+                                            ?>
+
                                         </ul>
-                                        <a href="blog-standard.html" class="btn btn-sm">View All</a>
+                                        <a href="<?php echo base_url('event') ?>" class="btn btn-sm">View All</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="section-full content-inner bg-white" style="background-image:url(images/background/bg1.jpg)">
+                <div class="section-full content-inner bg-white" style="background-image:url(<?php echo base_url('assets/') ?>images/background/bg1.jpg)">
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-6 col-md-12 col-sm-12 col-12 student-bx">
@@ -224,14 +195,13 @@
                                     <div class="item">
                                         <div class="client-box">
                                             <div class="testimonial-text">
-                                                <p>My younger son returns very happy with all activities happening at your school every day. I am glad that my son is being taught in your school. You have the motst qualified teachers in the area! My daughter
-                                                    is very satisfied with lessons of English and Math – they give her additional impact for development. Thank you!</p>
+                                                <p><?php echo $testimonial[0]['content'] ?></p>
                                             </div>
                                             <div class="testimonial-detail clearfix">
                                                 <div class="testimonial-pic radius">
-                                                    <img src="<?php echo base_url('assets/')?>images/testimonials/pic2.jpg" width="100" height="100" alt="">
+                                                    <img src="<?php echo base_url() ?>uploads/testimonials/<?php echo $testimonial[0]['img1'] ?>" width="100" height="100" alt="">
                                                 </div>
-                                                <h5 class="testimonial-name m-t0 m-b5">Mr. Jone Deo</h5>
+                                                <h5 class="testimonial-name m-t0 m-b5"><?php echo $testimonial[0]['name'] ?></h5>
                                                 <span>Student</span>
                                             </div>
                                         </div>
@@ -245,114 +215,32 @@
                                     <div class="dlab-separator bg-primary"></div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <div class="team-box">
-                                            <div class="media"><img src="<?php echo base_url('assets/')?>images/team/pic1.jpg" alt=""> </div>
-                                            <div class="team-info">
-                                                <h4 class="title"><a href="teachers-details.html">John Smith</a></h4>
-                                                <span>Teacher</span>
-                                                <p>We have an excellent teacher to child ratio at our Kindergarten to ensure that each child receives the attention he or she needs</p>
-                                                <ul class="list-inline">
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-                                                </ul>
+                                    <?php
+                                    if (!empty($teachers)) {
+                                        foreach ($teachers as $key => $value) {
+                                    ?>
+                                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                                <div class="team-box">
+                                                    <div class="media"><img src="<?php echo base_url() ?>uploads/teachers/<?php echo $value['img1'] ?>" alt=""> </div>
+                                                    <div class="team-info">
+                                                        <h4 class="title"><a href="<?php echo  base_url('teachers') ?>"><?php echo $value['name'] ?></a></h4>
+                                                        <span>Teacher</span>
+                                                        <p><?php echo $value['discription'] ?></p>
+
+                                                    </div>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <div class="team-box">
-                                            <div class="media"><img src="<?php echo base_url('assets/')?>images/team/pic2.jpg" alt=""> </div>
-                                            <div class="team-info">
-                                                <h4 class="title"><a href="teachers-details.html">Joe Smith</a></h4>
-                                                <span>Teacher</span>
-                                                <p>We have an excellent teacher to child ratio at our Kindergarten to ensure that each child receives the attention he or she needs</p>
-                                                <ul class="list-inline">
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <div class="team-box">
-                                            <div class="media"><img src="<?php echo base_url('assets/')?>images/team/pic3.jpg" alt=""> </div>
-                                            <div class="team-info">
-                                                <h4 class="title"><a href="teachers-details.html">Juan Carlos</a></h4>
-                                                <span>Teacher</span>
-                                                <p>We have an excellent teacher to child ratio at our Kindergarten to ensure that each child receives the attention he or she needs</p>
-                                                <ul class="list-inline">
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <div class="team-box">
-                                            <div class="media"><img src="<?php echo base_url('assets/')?>images/team/pic4.jpg" alt=""> </div>
-                                            <div class="team-info">
-                                                <h4 class="title"><a href="teachers-details.html">Mike Jones</a></h4>
-                                                <span>Teacher</span>
-                                                <p>We have an excellent teacher to child ratio at our Kindergarten to ensure that each child receives the attention he or she needs</p>
-                                                <ul class="list-inline">
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <div class="team-box">
-                                            <div class="media"><img src="<?php echo base_url('assets/')?>images/team/pic5.jpg" alt=""> </div>
-                                            <div class="team-info">
-                                                <h4 class="title"><a href="teachers-details.html">Jone Doe</a></h4>
-                                                <span>Teacher</span>
-                                                <p>We have an excellent teacher to child ratio at our Kindergarten to ensure that each child receives the attention he or she needs</p>
-                                                <ul class="list-inline">
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-6">
-                                        <div class="team-box">
-                                            <div class="media"><img src="<?php echo base_url('assets/')?>images/team/pic6.jpg" alt=""> </div>
-                                            <div class="team-info">
-                                                <h4 class="title"><a href="teachers-details.html">Harry</a></h4>
-                                                <span>Teacher</span>
-                                                <p>We have an excellent teacher to child ratio at our Kindergarten to ensure that each child receives the attention he or she needs</p>
-                                                <ul class="list-inline">
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-linkedin"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-instagram"></i></a></li>
-                                                    <li><a href="javascript:void(0);"><i class="fa fa-twitter"></i></a></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <?php
+                                        }
+                                    }
+                                    ?>
+
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="section-full bg-white content-inner-2 enquiry-area" style="background-image:url(images/background/bg2.jpg);">
+                <div class="section-full bg-white content-inner-2 enquiry-area" style="background-image:url(<?php echo base_url('assets/') ?>images/background/bg2.jpg);">
                     <div class="container">
                         <div class="row">
                             <div class="col-md-6">
@@ -388,7 +276,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                   
+
                                             <div class="col-lg-12">
                                                 <button name="submit" type="submit" value="Submit" class="btn"> <span>Submit</span> </button>
                                             </div>
@@ -403,36 +291,22 @@
                 <div class="section-full bg-gray content-inner-2">
                     <div class="container">
                         <div class="client-logo-bx owl-carousel owl-btn-center-lr owl-btn-3">
-                            <div class="item">
-                                <div class="client-bx">
-                                    <img src="<?php echo base_url('assets/')?>images/logo/logo-1.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="client-bx">
-                                    <img src="<?php echo base_url('assets/')?>images/logo/logo-2.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="client-bx">
-                                    <img src="<?php echo base_url('assets/')?>images/logo/logo-3.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="client-bx">
-                                    <img src="<?php echo base_url('assets/')?>images/logo/logo-4.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="client-bx">
-                                    <img src="<?php echo base_url('assets/')?>images/logo/logo-5.jpg" alt="" />
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="client-bx">
-                                    <img src="<?php echo base_url('assets/')?>images/logo/logo-6.jpg" alt="" />
-                                </div>
-                            </div>
+                            <?php
+                            if (!empty($gallery_grid)) {
+                                foreach ($gallery_grid as $key => $value) {
+                            ?>
+                                    <div class="item">
+                                        <div class="client-bx">
+                                            <a href="<?php echo base_url('gallery_grid') ?>">
+                                                <img src="<?php echo base_url() ?>uploads/gallery_grid/<?php echo $value['img1'] ?>" alt="" />
+                                            </a>
+                                        </div>
+                                    </div>
+                            <?php
+                                }
+                            }
+                            ?>
+
                         </div>
                     </div>
                 </div>
@@ -442,7 +316,7 @@
 
         <!-- Content END-->
         <!-- Footer -->
-        <?php echo view('maacc/layout/footer.php');?>
+        <?php echo view('maacc/layout/footer.php'); ?>
 
         <!-- Footer END-->
         <button class="scroltop fa fa-chevron-up"></button>
@@ -472,6 +346,18 @@
 
 
 
+        $(document).ready(function() {
+            $(".owl-carousel").owlCarousel({
+                items: 1, // Number of items you want to display
+                loop: true, // Infinite loop
+                margin: 10, // Margin between items
+                nav: true, // Show next and prev buttons
+                dots: false, // Hide pagination dots
+                autoplay: true, // Enable auto-play
+                autoplayTimeout: 3000, // Time in ms between transitions
+                autoplayHoverPause: true // Pause on hover
+            });
+        });
 
 
 
@@ -484,10 +370,9 @@
             var actionUrl = form.attr('action');
             $.ajax({
                 type: "POST",
-                url: "<?php echo base_url();?>add_home_enquiry",
+                url: "<?php echo base_url(); ?>add_home_enquiry",
                 data: form.serialize(), // serializes the form's elements.
-                success: function(data)
-                {
+                success: function(data) {
                     Swal.fire({
                         title: "Success!",
                         text: "Data saved successfully.",
@@ -509,8 +394,7 @@
                 }
             });
 
-            });
-
+        });
     </script>
 </body>
 

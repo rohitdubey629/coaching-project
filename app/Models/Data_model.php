@@ -45,4 +45,30 @@ class Data_model extends Model
         $builder->update();
         return $this->db->affectedRows();
     }
+
+    public function getfaqsRecord($table, $condition_data)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table($table);
+        $builder->select("*");
+
+        if (!empty($condition_data)) {
+            $builder->where($condition_data);
+        }
+        $query = $builder->get();
+        $row = $query->getResultArray();
+        return $row;
+    }
+
+    public function getsingleDataId($table, $id)
+    {
+        $db = \Config\Database::connect();
+        $builder = $db->table($table);
+        $builder->select("*");
+
+        $builder->where('id', $id);
+        $query = $builder->get();
+        $row = $query->getResultArray();
+        return $row;
+    }
 }

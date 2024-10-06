@@ -5,57 +5,139 @@ namespace App\Controllers;
 use App\Models;
 use App\Models\Data_model;
 
+use CodeIgniter\Images\ImageException;
+
 class Admin_home extends BaseController
 {
 
 
     public function index()
     {
+        $session = \Config\Services::session();
+
         $contactModel = new Data_model();
         $table = "home_scrollbar";
-        $data['homeSlider'] = $contactModel->get_data($table);
+        if ($session->get('is_login')) {
 
-        return view('Admin/home_view', $data);
+            $data['homeSlider'] = $contactModel->get_data($table);
+
+            return view('Admin/home_view', $data);
+        } else {
+            return redirect()->to(base_url());
+        }
     }
-
 
 
     public function addHomeSlider()
     {
-
-        $contactModel = new Data_model();
+        $galleryModal = model('App\Models\Data_Model');
+        $session = \Config\Services::session();
         $table = "home_scrollbar";
-        $id = $this->request->getPost('heading_id');
 
-        $getData = $contactModel->get_single_data($table, $id);
-        $data = [
-            'heading' => $this->request->getPost('heading'),
-            'content' => $this->request->getPost('content'),
-            'img1' =>  $_FILES["img1"]["name"],
-            'date' => date('Y-m-d'),
-        ];
-        if (!empty($getData)) {
-            $updateSlider = $contactModel->update_data($table, $id, $data);
-            $response = [
-                'status' => $updateSlider ? true : false,
-                'msg' => $updateSlider ? 'Slider data update successfully' : 'Failed to update slider',
-            ];
-        } else {
-            $addSlider = $contactModel->add_data($table, $data);
-            $response = [
-                'status' => $addSlider ? true : false,
-                'msg' => $addSlider ? 'Slider add data successfully' : 'Failed to add slider',
-            ];
-        }
+        if ($session->get('is_login')) {
+            $chk_img_file = true;
+            if (!empty($this->request->getpost('heading_id'))) {
+                //Update the Data
 
-        if ($response) {
-            // Return JSON response
-            return $this->response->setJSON($response);
+                $id = $this->request->getpost('heading_id');
+                //fetch the data
+                $getSliderData = $galleryModal->get_single_data($table, $id);
+
+                for ($i = 1; $i <= 1; $i++) {
+                    $img_name = "img" . $i;
+                    $imagefile = $this->request->getFile($img_name);
+
+                    $imageSize = $imagefile->getSizeByUnit('kb');
+                    if ($imageSize <= 1024) {
+
+                        if ($imagefile->isValid()) {
+
+                            $ext = array('jpg', 'jpeg', 'png', 'JPG', 'JPEG');
+                            if (in_array($imagefile->getClientExtension(), $ext)) {
+
+                                //get the previous image 
+                                $imagename = $getSliderData[$img_name];
+
+                                if (!empty($imagename)) {
+                                    //remove the previos image
+                                    if (file_exists("uploads/home_slider/" . $imagename)) {
+                                        unlink("uploads/home_slider/" . $imagename);
+                                    }
+                                }
+                                $newName = $imagefile->getRandomName();
+                                $imagefile->move('uploads/home_slider', $newName);
+
+                                // try {
+                                //     $image = \Config\Services::image()->withFile("uploads/home_slider/" . $newName)->resize(1600, 889, true)->save("uploads/home_slider/" . $newName);
+                                // } catch (CodeIgniter\Images\ImageException $e) {
+                                //     $responce['status'] = False;
+                                //     $responce['msg'] = '';
+                                // }
+                                $record[$img_name] = $newName;
+                            } else {
+                                $chk_img_file = false;
+                                $responce['status'] = false;
+                                $responce['msg'] = " Please Insert The Correct Image Format...";
+                            }
+                        }
+                    } else {
+                        $chk_img_file = false;
+                        $responce['status'] = false;
+                        $responce['msg'] = " Image Size Should be less than 1MB";
+                    }
+                }
+                if ($chk_img_file) {
+                    $record['content'] =  $this->request->getpost('content');
+                    $record['heading'] =  $this->request->getpost('heading');
+                    $record['date'] = date('Y-m-d');
+                    $galleryModal->update_data($table, $id, $record);
+                    $responce['status'] = true;
+                    $responce['msg'] = "Record Updated! Please Wait...";
+                }
+            } else {
+                // Insert The Data
+                for ($i = 1; $i <= 1; $i++) {
+                    $img_name = "img" . $i;
+                    $imagefile = $this->request->getFile($img_name);
+                    if ($imagefile->isValid()) {
+                        $ext = array('jpg', 'jpeg', 'png', 'JPG', 'JPEG');
+                        if (in_array($imagefile->getClientExtension(), $ext)) {
+                            $newName = $imagefile->getRandomName();
+                            $imagefile->move('uploads/home_slider', $newName);
+                            // try {
+                            //     $image = \Config\Services::image()->withFile("uploads/home_slider/" . $newName)->resize(1600, 889, true)->save("uploads/home_slider/" . $newName);
+                            // } catch (CodeIgniter\Images\ImageException $e) {
+                            //     $responce['status'] = False;
+                            //     $responce['msg'] = '';
+                            // }
+                            $record[$img_name] = $newName;
+                        } else {
+                            $chk_img_file = false;
+                            $responce['status'] = false;
+                            $responce['msg'] = " Please Insert The Correct Image Format...";
+                        }
+                    }
+                }
+                if ($chk_img_file) {
+
+                    $record['content'] =  $this->request->getpost('content');
+                    $record['heading'] =  $this->request->getpost('heading');
+                    $record['date'] = date('Y-m-d');
+                    $galleryModal->add_data($table, $record);
+                    $responce['status'] = true;
+                    $responce['msg'] = "Record Inserted! Please Wait...";
+                }
+            }
+            echo json_encode($responce);
         } else {
-            // Handle non-AJAX requests (if needed)
-            return redirect()->to(site_url());
+            return redirect()->to(base_url());
         }
     }
+
+
+
+
+
     public function updateHomeslider()
     {
 

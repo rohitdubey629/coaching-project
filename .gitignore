@@ -129,3 +129,6 @@ nb-configuration.xml
 /.php-cs-fixer.php
 
 # testing
+
+#git push -f origin master
+git rm --cached config
